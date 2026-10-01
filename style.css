@@ -1,0 +1,256 @@
+/* Variáveis para facilidade de temas (Limpo e Tons Pastéis) */
+:root {
+    --gradiente-fundo: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --fundo-cartao: #ffffff;
+    --fundo-item: #f7fafc;
+    --cor-texto: #2d3748;
+    --cor-primaria: #6c5ce7;
+    --cor-primaria-destaque: #5b4bc4;
+    --cor-borda: #edf2f7;
+    --cor-perigo: #ff7675;
+    --cor-sucesso: #00b894;
+    --cor-concluido: #a0aec0;
+}
+
+/* Modo escuro */
+body.modo-escuro {
+    --gradiente-fundo: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    --fundo-cartao: #1a202c;
+    --fundo-item: #2d3748;
+    --cor-texto: #f7fafc;
+    --cor-borda: #4a5568;
+    --cor-concluido: #718096;
+}
+
+/* Reset Global */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--gradiente-fundo);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Cartão Principal */
+.cartao-aplicacao {
+    background: var(--fundo-cartao);
+    color: var(--cor-texto);
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Cabeçalho */
+.cabecalho-aplicacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 25px; 
+}
+
+.cabecalho-aplicacao h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.botao-secundario {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.botao-secundario:hover {
+    transform: scale(1.1);
+    color: var(--cor-primaria);
+}
+
+/* Caixa de Entrada */
+.caixa-entrada {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--cor-borda);
+    border-radius: 12px;
+    outline: none;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--cor-texto);
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: var(--cor-primaria);
+}
+
+.botao-principal {
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.botao-principal:hover {
+    background: var(--cor-primaria-destaque);
+    transform: translateY(-2px);
+}
+
+.botao-principal:active {
+    transform: translateY(0);
+}
+
+/* Lista de Tarefas */
+.lista-tarefas {
+    list-style: none;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Barra de rolagem personalizada */
+.lista-tarefas::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lista-tarefas::-webkit-scrollbar-thumb {
+    background-color: var(--cor-borda);
+    border-radius: 10px;
+}
+
+.item-tarefa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    background: var(--fundo-item);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    animation: aparecer 0.3s ease-out;
+    word-break: break-word;
+}
+
+.item-tarefa span {
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.item-tarefa.concluida span {
+    text-decoration: line-through;
+    color: var(--cor-concluido);
+}
+
+/* Mensagem de Lista Vazia */
+.lista-vazia {
+    text-align: center;
+    padding: 20px 0;
+    color: var(--cor-concluido);
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+/* Ações das Tarefas */
+.acoes-tarefa {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.botao-acao {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--cor-concluido);
+    transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.botao-acao:hover {
+    transform: scale(1.15);
+}
+
+.botao-acao.check:hover {
+    color: var(--cor-sucesso);
+}
+
+.item-tarefa.concluida .botao-acao.check {
+    color: var(--cor-sucesso);
+}
+
+.botao-acao.excluir:hover {
+    color: var(--cor-perigo);
+}
+
+/* Rodapé */
+.rodape-aplicacao {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--cor-borda);
+    font-size: 0.85rem;
+    color: var(--cor-concluido);
+    text-align: center;
+}
+
+/* Animações */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+:root {
+    --gradiente-fundo: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --fundo-cartao: #121212;
+    --fundo-item: #1e1e1e;
+    --cor-texto: #00ffff;
+    --cor-primaria: #ff007f;
+    --cor-primaria-destaque: #e0006c;
+    --cor-borda: #ff007f;
+    --cor-concluido: #555;
+    --cor-sucesso: #00ff66;
+    --cor-perigo: #ff3333;
+}
+
+.cartao-aplicacao {
+    border: 1px solid var(--cor-primaria);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
+}
+
+.botao-principal {
+    box-shadow: 0 0 10px var(--cor-primaria);
+}
+
+input[type="text"] {
+    color: #fff;
+}
