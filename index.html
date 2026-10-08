@@ -3,47 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Painel de Tarefas</title>
+    <title>Painel de Tarefas Completo</title>
     
-    <!-- Ícones Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Estilos customizados -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+    />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="cartao-aplicacao">
         <header class="cabecalho-aplicacao">
-            <h1>Minhas Tarefas</h1>
-            <button id="botao-tema" class="botao-secundario" aria-label="Alternar modo escuro">
-                <i class="fa-solid fa-moon"></i>
-            </button>
+            <div class="perfil-usuario">
+                <!-- Adicionado a tag img src -->
+                <img src="432D4678-C765-4D94-BA03-09314D5D5D1F.jpg" alt="Foto de Perfil" class="foto-perfil">
+                <div>
+                    <h2>Minhas Tarefas ✨</h2>
+                    <p>Organize o seu dia</p>
+                </div>
+            </div>
+            <div class="acoes-cabecalho">
+                <button id="botao-atualizar" class="botao-iconico" aria-label="Recarregar dados" title="Atualizar">
+                    <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                </button>
+                <button id="botao-tema" class="botao-iconico" aria-label="Alternar modo escuro" title="Tema">
+                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                </button>
+            </div>
         </header>
 
-        <section class="caixa-entrada">
-            <input 
-                type="text" 
-                id="campo-tarefa" 
-                placeholder="O que vamos fazer hoje?"
-                aria-label="Descrição da nova tarefa"
-                autocomplete="off"
-            >
-            <button id="botao-adicionar" class="botao-principal">
-                <i class="fa-solid fa-plus"></i>
-                <span>Adicionar</span>
-            </button>
+        <section class="estatisticas">
+            <div class="card-stat">
+                <span id="stat-total">0</span>
+                <small>Total</small>
+            </div>
+            <div class="card-stat">
+                <span id="stat-pendentes">0</span>
+                <small>Pendentes</small>
+            </div>
+            <div class="card-stat">
+                <span id="stat-concluidas">0</span>
+                <small>Concluídas</small>
+            </div>
+            <div class="card-stat">
+                <span id="stat-favoritas">0</span>
+                <small>Favoritas</small>
+            </div>
         </section>
 
-        <ul id="lista-tarefas" class="lista-tarefas" aria-live="polite">
-            <!-- As tarefas serão inseridas aqui dinamicamente via JS -->
-        </ul>
+        <form id="formulario-tarefa" class="formulario-tarefa">
+            <input type="hidden" id="tarefa-id">
+            
+            <div class="caixa-entrada-principal">
+                <label for="campo-tarefa" class="sr-only">Descrição da tarefa</label>
+                <input type="text" id="campo-tarefa" placeholder="O que vamos fazer hoje?" autocomplete="off" required>
+                <button type="submit" id="botao-salvar" class="botao-principal">
+                    <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                    <span id="texto-botao-salvar">Adicionar</span>
+                </button>
+            </div>
+
+            <div class="opcoes-adicionais">
+                <input type="date" id="campo-data" title="Data limite">
+                <select id="campo-prioridade" title="Prioridade">
+                    <option value="baixa">Baixa</option>
+                    <option value="media" selected>Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </div>
+        </form>
+
+        <section class="secao-filtros">
+            <div class="caixa-pesquisa">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="text" id="campo-pesquisa" placeholder="Pesquisar tarefas..." autocomplete="off">
+            </div>
+
+            <div class="botoes-filtro" id="botoes-filtro">
+                <button class="filtro-btn ativo" data-filtro="todas">Todas</button>
+                <button class="filtro-btn" data-filtro="pendentes">Pendentes</button>
+                <button class="filtro-btn" data-filtro="concluidas">Concluídas</button>
+                <button class="filtro-btn" data-filtro="fixadas">Fixadas</button>
+                <button class="filtro-btn" data-filtro="favoritas">Favoritas</button>
+            </div>
+        </section>
+
+        <section aria-label="Lista de Tarefas">
+            <ul id="lista-tarefas" class="lista-tarefas" aria-live="polite">
+            
+            </ul>
+        </section>
 
         <footer class="rodape-aplicacao">
             <span id="contador-tarefas">0 tarefas na lista</span>
         </footer>
     </main>
 
-    <!-- Scripts JavaScript -->
-    <script src="script.js"></script>
+    <button id="botao-novidades" class="botao-novidades" title="Ver novidades">
+        <i class="fa-solid fa-sparkles"></i> Novidades
+        <span class="badge-novo">Novo</span>
+    </button>
+
+    <div id="modal-novidades" class="modal-container">
+        <div class="modal-conteudo">
+            <button id="fechar-modal" class="fechar-modal">&times;</button>
+            <h2>✨ O que há de novo!</h2>
+            <ul class="lista-novidades">
+                <li>
+                    <strong>📌 Favoritar tarefas:</strong>
+                    <p>Agora você pode favoritar tarefas clicando na estrela para fixá-las no topo da sua lista.</p>
+                </li>
+                <li>
+                    <strong>📜 Histórico de tarefas:</strong>
+                    <p>Tarefas excluídas vão para a aba de histórico. De lá, você pode restaurá-las ou apagá-las de vez.</p>
+                </li>
+            </ul>
+            <button id="entendi-novidades" class="botao-entendi">Entendi!</button>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
